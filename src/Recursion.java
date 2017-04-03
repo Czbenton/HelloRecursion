@@ -11,8 +11,10 @@ public class Recursion {
 //        System.out.println(fibonacci(8));
 //        System.out.println(count7(1237));
 //        System.out.println(powerN(3,3));
-        System.out.println(countX("xxiouhhox"));
-
+//        System.out.println(countX("xxiouhhox"));
+//        System.out.println(changeXY("xou-xx"));
+//        System.out.println(changePi("xpixxxpi"));
+        System.out.println(noX("xaxb"));
     }
 
     public static int bunnyEars2(int bunnies) {
@@ -73,21 +75,58 @@ public class Recursion {
 
         if (n <= 1) return base;
 
-        else return base * powerN(base, n-1);
+        else return base * powerN(base, n - 1);
     }
 
     public static int countX(String str) {
         int result = 0;
-        if(str.length() == 0) {
+        if (str.length() == 0) {
             return 0;
         }
 
-        if(str.charAt(0) == 'x') {
+        if (str.charAt(0) == 'x') {
             result++;
         }
 
         result += countX(str.substring(1, str.length()));
         return result;
     }
+
+    public static String changeXY(String str) {
+
+//        This is not recursive... but if it works it works!
+
+        if (str.length() > 0) {
+            if (str.contains("x")) return str.replace('x', 'y');
+            if (str.substring(0, 1).equalsIgnoreCase("x")) return str.replace('x', 'y');
+
+            else return str;
+        } else return str;
+
+
+    }
+
+    public static String changePi(String str) {
+
+        if (str.equals("") || str.length() < 2) return str;
+
+        if (str.charAt(0) == 'p' && str.charAt(1) == 'i') return "3.14" + changePi(str.substring(2));
+
+        else return str.charAt(0) + changePi(str.substring(1));
+
+        // Let the recursion take care of the brute force. Just list the givens, and let it do the work
+        // of progressing through the string.
+    }
+
+    public static String noX(String str) {
+
+        if (str.length() == 0) return str;
+
+        if (str.length() > 0 && str.substring(0,1).equalsIgnoreCase("x")) return "" + noX(str.substring(1));
+
+        else return str.charAt(0) + noX(str.substring(1));
+
+    }
+
 
 }
